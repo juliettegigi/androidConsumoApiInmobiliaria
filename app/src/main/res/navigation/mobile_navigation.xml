@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_inicio">
+
+    <fragment
+        android:id="@+id/nav_inicio"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inicio.InicioFragment"
+        android:label="@string/inicio"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.perfil.PerfilFragment"
+        android:label="@string/perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_inmueble"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inmuebles.InmuebleFragment"
+        android:label="@string/inmuebles"
+        tools:layout="@layout/fragment_inmueble" >
+
+        <action
+            android:id="@+id/action_nav_inmueble_to_nav_crearInmFragment"
+            app:destination="@id/nav_crearInmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_inquilino"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inquilino.InquilinoFragment"
+        android:label="Inquilinos"
+        tools:layout="@layout/fragment_inquilino" />
+    <fragment
+        android:id="@+id/nav_contrato"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.contrato.ContratoFragment"
+        android:label="@string/contratos"
+        tools:layout="@layout/fragment_inquilino" />
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.logout.LogoutFragment"
+        android:label="@string/cerrar_sesi_n"
+        tools:layout="@layout/fragment_inquilino" />
+    <fragment
+        android:id="@+id/nav_crearInmFragment"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inmuebles.CrearInmFragment"
+        android:label="Nuevo inmueble"
+        tools:layout="@layout/fragment_crear_inm" >
+
+        <action
+            android:id="@+id/action_nav_crearInmFragment_to_nav_inmueble"
+            app:destination="@id/nav_inmueble" />
+    </fragment>
+
+</navigation>

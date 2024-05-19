@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">InmobiliariaGutierrezJ</string>
+    <string name="title_activity_menu_navegable">menuNavegable</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="perfil">Perfil</string>
+    <string name="inicio">Inicio</string>
+    <string name="inmuebles">Inmuebles</string>
+    <string name="inquilinos">Inquilinos</string>
+    <string name="contratos">Contratos</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+</resources>

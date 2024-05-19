@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.InmobiliariaGutierrezJ" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorPrimary">@color/violeta</item>
+
+    </style>
+
+    <style name="Theme.InmobiliariaGutierrezJ" parent="Base.Theme.InmobiliariaGutierrezJ">
+
+
+    </style>
+
+    <style name="mibuton" parent="@android:style/Widget.EditText">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorSecondary">@color/violeta</item>
+        <item name="colorOnPrimary">@color/violeta</item>
+        <item name="colorOnSecondary">@color/violeta</item>
+
+    </style>
+
+    <style name="Theme.InmobiliariaGutierrezJ.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.InmobiliariaGutierrezJ.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.InmobiliariaGutierrezJ.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>
