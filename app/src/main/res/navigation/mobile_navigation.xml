@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_nav_inmueble_to_nav_crearInmFragment"
             app:destination="@id/nav_crearInmFragment" />
+        <action
+            android:id="@+id/action_nav_inmueble_to_nav_masIfoFragment"
+            app:destination="@id/nav_masInfoFragment" />
+        <action
+            android:id="@+id/action_nav_inmueble_to_masInfoFragment"
+            app:destination="@id/nav_masInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_inquilino"
@@ -52,5 +58,14 @@
             android:id="@+id/action_nav_crearInmFragment_to_nav_inmueble"
             app:destination="@id/nav_inmueble" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_masInfoFragment"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inmuebles.MasInfoFragment"
+        android:label="MasInfoFragment" >
+        <action
+            android:id="@+id/action_masInfoFragment_to_nav_inmueble"
+            app:destination="@id/nav_inmueble" />
+    </fragment>
+
 
 </navigation>

@@ -14,6 +14,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -26,9 +27,14 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public class ApiClient {
-    private static final String URL="http://192.168.16.100:5000/";
-    private static final String URL2="http://192.168.0.91:5000/";
+
+    private static final String URL="http://192.168.0.91:5000/"; //celular
+    //private static final String URL="http://192.168.16.100:5000/";
     private static MisEndpoints misEndpoints;
+
+    public static String getURL() {
+        return URL;
+    }
 
     public interface MisEndpoints{
         @FormUrlEncoded
@@ -51,8 +57,9 @@ public class ApiClient {
         Call<ArrayList<InmuebleTipo>> getInmuebleTipos(@Header("Authorization") String token);
 
         @Multipart
-        @POST("api/inmuebles")
-        Call<Void> crearInmueble(
+        @POST("inmueble")
+        Call<Inmueble> postInmueble(
+                @Header("Authorization") String token,
                 @Part("InmuebleTipoId") RequestBody tipoId,
                 @Part("Direccion") RequestBody direccion,
                 @Part("CantidadAmbientes") RequestBody cantidadAmbientes,
@@ -64,6 +71,9 @@ public class ApiClient {
                 @Part("Disponible") RequestBody disponible,
                 @Part List<MultipartBody.Part> imagenes
         );
+        @FormUrlEncoded
+        @POST("Propietario/email")
+        Call<String> enviarCorreo(@Field("email") String email);
     
 
 
@@ -73,10 +83,13 @@ public class ApiClient {
     public static MisEndpoints getMisEndpoints(){  //retorno un objeto q implementa la interfaz q la implementa el retrofit
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(URL2)
+                .baseUrl(URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson)) //parsear json a objeto java
                 .build();
          misEndpoints=retrofit.create(MisEndpoints.class);
         return misEndpoints;
     }
+
+
 }

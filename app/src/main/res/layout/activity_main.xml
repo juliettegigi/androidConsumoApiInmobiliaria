@@ -65,6 +65,7 @@
             android:text="Correo electrónico"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -116,21 +117,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btnIniciarSesion"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="3dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Iniciar sesión"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/c2"
-        android:background="@drawable/mibutton"
-        />
-
-    <Button
         android:id="@+id/btnRegistrame"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="3dp"
@@ -154,6 +140,31 @@
         app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/c2" />
+
+    <TextView
+        android:id="@+id/tvOlvideClave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Olvidé mi clave"
+        android:textColor="@color/violeta"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c2" />
+
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3dp"
+
+        android:layout_marginTop="132dp"
+        android:background="@drawable/mibutton"
+        android:text="Iniciar sesión"
+        app:layout_constraintTop_toBottomOf="@+id/tvOlvideClave"
+        tools:layout_editor_absoluteX="3dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

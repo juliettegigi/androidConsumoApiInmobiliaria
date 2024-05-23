@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.softulp.app.inmobiliariagutierrezj.R;
 import com.softulp.app.inmobiliariagutierrezj.databinding.FragmentInmuebleBinding;
@@ -28,7 +31,14 @@ public class InmuebleFragment extends Fragment {
         binding = FragmentInmuebleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-     vm.cargarInmuebles();
+        vm.getMutableAdapter().observe(getViewLifecycleOwner(), new Observer<RecyclerView.Adapter<InmuebleAdapter.ViewHolder>>() {
+            @Override
+            public void onChanged(RecyclerView.Adapter<InmuebleAdapter.ViewHolder> viewHolderAdapter) {
+                GridLayoutManager glm=new GridLayoutManager(getContext(),1,GridLayoutManager.VERTICAL,false);
+                binding.rvLista.setLayoutManager(glm);
+                binding.rvLista.setAdapter(viewHolderAdapter);
+            }
+        });
         binding.btAddInm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

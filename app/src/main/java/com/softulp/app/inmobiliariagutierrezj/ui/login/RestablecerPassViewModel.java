@@ -6,10 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.softulp.app.inmobiliariagutierrezj.models.Usuario;
 import com.softulp.app.inmobiliariagutierrezj.request.ApiClient;
 import com.softulp.app.inmobiliariagutierrezj.request.Archivos;
 import com.softulp.app.inmobiliariagutierrezj.ui.menuNav.MenuNavegable;
@@ -18,34 +15,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainViewModel extends AndroidViewModel {
-    MutableLiveData<String> mutableMsgError;
-    public MainViewModel(@NonNull Application application) {
+public class RestablecerPassViewModel extends AndroidViewModel {
+    public RestablecerPassViewModel(@NonNull Application application) {
         super(application);
     }
-    public LiveData<String> getMutableMsgError(){
-        if(mutableMsgError==null)
-            mutableMsgError=new MutableLiveData<>();
-        return  mutableMsgError;
-    }
 
-    public void validar(String email,String pass){
 
+    public void enviarEmail(String email){
         ApiClient.MisEndpoints api = ApiClient.getMisEndpoints();
-        Call<String> call= api.login(email,pass);
+        Call<String> call= api.enviarCorreo(email);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    Archivos.guardarTokenArchivoPreferencia(getApplication(),response.body());
 
-                    Intent intent=new Intent(getApplication(), MenuNavegable.class);
-
+                    Intent intent=new Intent(getApplication(), RecibirEmailActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Log.d("salida","whatt1");
                     getApplication().startActivity(intent);
+                    Log.d("salida","whatt2");
                 } else {
                     Log.d("salida", "Incorrecto");
-                     mutableMsgError.setValue("🚫Correo o contraseña incorrecta");
+                  //  mutableMsgError.setValue("🚫Correo o contraseña incorrecta");
 
                 }
 
@@ -57,4 +48,5 @@ public class MainViewModel extends AndroidViewModel {
             }
         });
     }
+
 }

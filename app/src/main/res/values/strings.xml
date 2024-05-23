@@ -15,4 +15,6 @@
     <string name="inquilinos">Inquilinos</string>
     <string name="contratos">Contratos</string>
     <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

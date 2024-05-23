@@ -14,6 +14,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -24,6 +26,7 @@ import android.widget.ArrayAdapter;
 
 import com.softulp.app.inmobiliariagutierrezj.R;
 import com.softulp.app.inmobiliariagutierrezj.databinding.FragmentCrearInmBinding;
+import com.softulp.app.inmobiliariagutierrezj.models.InmuebleTipo;
 
 public class CrearInmFragment extends Fragment {
 
@@ -43,12 +46,35 @@ public class CrearInmFragment extends Fragment {
         binding=FragmentCrearInmBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
         abrirGaleria();
-        vm.getMutableInmuebleTipos().observe(getViewLifecycleOwner(), new Observer<ArrayAdapter<String>>() {
+        vm.getMutableInmuebleTipos().observe(getViewLifecycleOwner(), new Observer<ArrayAdapter<InmuebleTipo>>() {
                     @Override
-                    public void onChanged(ArrayAdapter<String> stringArrayAdapter) {
+                    public void onChanged(ArrayAdapter<InmuebleTipo> stringArrayAdapter) {
                         binding.spinnerImuebleTipos.setAdapter(stringArrayAdapter);
                     }
                 });
+        vm.getMutableAdapterRV().observe(getViewLifecycleOwner(), new Observer<RecyclerView.Adapter<ImgInmAdapter.ViewHolder>>() {
+            @Override
+            public void onChanged(RecyclerView.Adapter<ImgInmAdapter.ViewHolder> viewHolderAdapter) {
+                GridLayoutManager glm=new GridLayoutManager(getContext(),3,GridLayoutManager.VERTICAL,false);
+                binding.rvImagenes.setLayoutManager(glm);
+                binding.rvImagenes.setAdapter(viewHolderAdapter);
+            }
+        });
+        binding.btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InmuebleTipo selectedItem = (InmuebleTipo) binding.spinnerImuebleTipos.getSelectedItem();
+                int inmuebleTipoId = selectedItem.getId(); // Recupera el ID del item seleccionado
+
+                vm.AltaInmueble(inmuebleTipoId,
+                                binding.etDireccion.getText().toString(),
+                        binding.etCatidadAmbientes.getText().toString(),
+                        binding.spinnerUso.getSelectedItem().toString(),
+                        binding.etPrecioBase.getText().toString());
+
+            }
+        });
+
         binding.btnAgregarImgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +110,7 @@ public class CrearInmFragment extends Fragment {
 
         arl = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
-            public void onActivityResult(ActivityResult result) {
+            public void onActivityResult(ActivityResult result) { //result.getData() contiene el intent con los datos seleccionado
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     vm.recibirFotos(result);
                 }

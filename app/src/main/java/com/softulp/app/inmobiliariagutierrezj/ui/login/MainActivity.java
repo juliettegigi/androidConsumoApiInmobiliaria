@@ -1,5 +1,6 @@
 package com.softulp.app.inmobiliariagutierrezj.ui.login;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -39,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 vm.validar(binding.etEmail.getText().toString(),binding.etPass.getText().toString());
+            }
+        });
+
+        binding.tvOlvideClave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, RestablecerPassActivity.class);
+                startActivity(intent);
             }
         });
 
