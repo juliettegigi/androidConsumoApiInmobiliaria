@@ -59,9 +59,9 @@ public class MasInfoFragment extends Fragment {
             public void onChanged(Inmueble inmueble) {
                 binding.tvDireccion.setText(inmueble.getDireccion());
                 binding.tvCantidadAmbientes.setText(String.valueOf(inmueble.getCantidadAmbientes()));
-                binding.tvDispoible.setText(inmueble.getDisponible()?"si":"no");
+                binding.tvDispoible.setText(inmueble.isDisponible()?"si":"no");
                 binding.tvPrecio.setText(inmueble.getPrecioBase()+"");
-                binding.tvSuspendido.setText(inmueble.getSuspendido()?"si":"no");
+                binding.tvSuspendido.setText(inmueble.isSuspendido()?"si":"no");
             }
         });
 

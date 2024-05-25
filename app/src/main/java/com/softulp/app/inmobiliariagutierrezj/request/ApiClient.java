@@ -29,7 +29,7 @@ import retrofit2.http.Path;
 public class ApiClient {
 
     private static final String URL="http://192.168.0.91:5000/"; //celular
-    //private static final String URL="http://192.168.16.100:5000/";
+   // private static final String URL="http://192.168.16.100:5000/";
     private static MisEndpoints misEndpoints;
 
     public static String getURL() {
@@ -53,6 +53,10 @@ public class ApiClient {
         @GET("Propietario/misInmuebles")
         Call<ArrayList<Inmueble>> getMisInmuebles(@Header("Authorization") String token);
 
+
+        @GET("Inmueble/inmconcontrato")
+        Call<ArrayList<Inmueble>> getInmueblesConContrato(@Header("Authorization")String token);
+
         @GET("InmuebleTipo")
         Call<ArrayList<InmuebleTipo>> getInmuebleTipos(@Header("Authorization") String token);
 
@@ -74,7 +78,12 @@ public class ApiClient {
         @FormUrlEncoded
         @POST("Propietario/email")
         Call<String> enviarCorreo(@Field("email") String email);
-    
+
+        @FormUrlEncoded
+        @PUT("Propietario/pass")
+        Call<String> actualizarPass(@Header("Authorization") String token,@Field("nuevaPass")  String pass);
+
+
 
 
     }
@@ -84,7 +93,7 @@ public class ApiClient {
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
+               // .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson)) //parsear json a objeto java
                 .build();
          misEndpoints=retrofit.create(MisEndpoints.class);

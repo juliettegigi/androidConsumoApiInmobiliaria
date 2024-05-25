@@ -56,6 +56,7 @@ public class InmuebleViewModel extends AndroidViewModel {
                     inmuebleList=response.body();
                     RecyclerView.Adapter<InmuebleAdapter.ViewHolder>  adapter=new InmuebleAdapter(inmuebleList,getApplication());
                     mutableAdapter.setValue(adapter);
+
                 }
                 else if(response.code() == 204) {
                     Log.d("salida", "q caralio");

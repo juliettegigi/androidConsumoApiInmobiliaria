@@ -1,9 +1,12 @@
 package com.softulp.app.inmobiliariagutierrezj.models;
 
-public class ImagenInmueble {
+import java.io.Serializable;
+
+public class ImagenInmueble implements Serializable {
     private int id;
     private int inmuebleId;
     private String imagen;
+    private String imagenFile;
 
     private  Inmueble inmueble;
 

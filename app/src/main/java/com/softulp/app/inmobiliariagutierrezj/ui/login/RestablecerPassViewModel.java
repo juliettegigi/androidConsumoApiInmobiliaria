@@ -28,12 +28,10 @@ public class RestablecerPassViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-
+                  /*
                     Intent intent=new Intent(getApplication(), RecibirEmailActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Log.d("salida","whatt1");
-                    getApplication().startActivity(intent);
-                    Log.d("salida","whatt2");
+                    getApplication().startActivity(intent);*/
                 } else {
                     Log.d("salida", "Incorrecto");
                   //  mutableMsgError.setValue("🚫Correo o contraseña incorrecta");

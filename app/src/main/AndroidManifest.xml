@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menuNav.ui.inquilino.VerInquilinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.EsperandoCorreoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.login.RestablecerPassActivity"
             android:exported="false" />
         <activity
@@ -37,6 +43,16 @@
         <activity
             android:name=".ui.login.RecibirEmailActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="reset_password"
+                    android:scheme="myapp" />
+            </intent-filter>
         </activity>
     </application>
 

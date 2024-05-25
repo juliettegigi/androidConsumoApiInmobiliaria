@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gris">#E8F0FE</color>
-    <color name="violeta">#7F1E67</color>
-    <color name="verde">#29BD25</color>
+    <color name="violeta2">#7F1E67</color>
+    <color name="violeta">#BD1196</color>
+    <color name="verde">#47BDC9</color>
+    <color name="amarillo">#FFFA9A</color>
+    <color name="purpura">#2B2A7D</color>
 </resources>

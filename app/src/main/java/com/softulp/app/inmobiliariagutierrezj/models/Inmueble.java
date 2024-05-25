@@ -24,13 +24,15 @@ public class Inmueble implements Serializable {
 
     private Usuario propietario;
     private ArrayList<ImagenInmueble> imagenes;
+    private ArrayList<Contrato> contratos;
     private InmuebleTipo inmuebleTipo;
+
     public enum Uso {
         Comercial,
         Residencial
     }
 
-    public Inmueble(int id, int propietarioId, int inmuebleTipoId, String direccion, int cantidadAmbientes, Uso uso, float precioBase, float cLatitud, float cLongitud, boolean suspendido, boolean disponible, Usuario propietario, ArrayList<ImagenInmueble> imagenes, InmuebleTipo inmuebleTipo) {
+    public Inmueble(int id, int propietarioId, int inmuebleTipoId, String direccion, int cantidadAmbientes, Uso uso, float precioBase, float cLatitud, float cLongitud, boolean suspendido, boolean disponible, Usuario propietario, ArrayList<ImagenInmueble> imagenes, ArrayList<Contrato> contratos, InmuebleTipo inmuebleTipo) {
         this.id = id;
         this.propietarioId = propietarioId;
         this.inmuebleTipoId = inmuebleTipoId;
@@ -44,17 +46,8 @@ public class Inmueble implements Serializable {
         this.disponible = disponible;
         this.propietario = propietario;
         this.imagenes = imagenes;
+        this.contratos = contratos;
         this.inmuebleTipo = inmuebleTipo;
-    }
-
-
-
-    public Uso getUso() {
-        return uso;
-    }
-
-    public void setUso(Uso uso) {
-        this.uso = uso;
     }
 
     public int getId() {
@@ -95,6 +88,14 @@ public class Inmueble implements Serializable {
 
     public void setCantidadAmbientes(int cantidadAmbientes) {
         this.cantidadAmbientes = cantidadAmbientes;
+    }
+
+    public Uso getUso() {
+        return uso;
+    }
+
+    public void setUso(Uso uso) {
+        this.uso = uso;
     }
 
     public float getPrecioBase() {
@@ -153,36 +154,19 @@ public class Inmueble implements Serializable {
         this.imagenes = imagenes;
     }
 
+    public ArrayList<Contrato> getContratos() {
+        return contratos;
+    }
+
+    public void setContratos(ArrayList<Contrato> contratos) {
+        this.contratos = contratos;
+    }
+
     public InmuebleTipo getInmuebleTipo() {
         return inmuebleTipo;
-    }
-    public boolean getDisponible() {
-        return disponible;
-    }
-    public boolean getSuspendido() {
-        return suspendido;
     }
 
     public void setInmuebleTipo(InmuebleTipo inmuebleTipo) {
         this.inmuebleTipo = inmuebleTipo;
-    }
-
-    @Override
-    public String toString() {
-        return "Inmueble{" +
-                "id=" + id +
-                ", propietarioId=" + propietarioId +
-                ", inmuebleTipoId=" + inmuebleTipoId +
-                ", direccion='" + direccion + '\'' +
-                ", cantidadAmbientes=" + cantidadAmbientes +
-                ", precioBase=" + precioBase +
-                ", cLatitud=" + cLatitud +
-                ", cLongitud=" + cLongitud +
-                ", suspendido=" + suspendido +
-                ", disponible=" + disponible +
-                ", propietario=" + propietario +
-                ", imagenes=" + imagenes +
-                ", inmuebleTipo=" + inmuebleTipo +
-                '}';
     }
 }

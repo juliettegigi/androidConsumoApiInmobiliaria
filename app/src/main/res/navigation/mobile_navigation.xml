@@ -37,12 +37,21 @@
         android:id="@+id/nav_inquilino"
         android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inquilino.InquilinoFragment"
         android:label="Inquilinos"
-        tools:layout="@layout/fragment_inquilino" />
+        tools:layout="@layout/fragment_inquilino" >
+
+        <action
+            android:id="@+id/action_nav_inquilino_to_nav_verInquilinoFragment"
+            app:destination="@id/nav_verInquilinoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_contrato"
         android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.contrato.ContratoFragment"
         android:label="@string/contratos"
-        tools:layout="@layout/fragment_inquilino" />
+        tools:layout="@layout/fragment_inquilino" >
+        <action
+            android:id="@+id/action_nav_contrato_to_nav_verContratoFragment"
+            app:destination="@id/nav_verContratoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_logout"
         android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.logout.LogoutFragment"
@@ -65,6 +74,25 @@
         <action
             android:id="@+id/action_masInfoFragment_to_nav_inmueble"
             app:destination="@id/nav_inmueble" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_verInquilinoFragment"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inquilino.VerInquilinoFragment"
+        android:label="Datos del inquilino"
+        tools:layout="@layout/fragment_ver_inquilino" >
+
+        <action
+            android:id="@+id/action_nav_verInquilinoFragment_to_nav_inquilino"
+            app:destination="@id/nav_inquilino" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_verContratoFragment"
+        android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.contrato.VerContratoFragment"
+        android:label="fragment_ver_contrato"
+        tools:layout="@layout/fragment_ver_contrato" >
+        <action
+            android:id="@+id/action_nav_verContratoFragment_to_nav_contrato"
+            app:destination="@id/nav_contrato" />
     </fragment>
 
 
