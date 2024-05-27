@@ -166,5 +166,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tvOlvideClave"
         tools:layout_editor_absoluteX="3dp" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRegistrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

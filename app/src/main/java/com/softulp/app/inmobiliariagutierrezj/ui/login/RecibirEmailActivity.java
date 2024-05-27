@@ -9,53 +9,39 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.softulp.app.inmobiliariagutierrezj.databinding.ActivityRecibirEmailBinding;
 
 public class RecibirEmailActivity extends AppCompatActivity {
-    ActivityRecibirEmailBinding binding;
+ActivityRecibirEmailBinding binding;
     RecibirEmailViewModel vm;
     private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityRecibirEmailBinding.inflate(getLayoutInflater());
-        vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(RecibirEmailViewModel.class);
+        binding = ActivityRecibirEmailBinding.inflate(getLayoutInflater());
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(RecibirEmailViewModel.class);
         setContentView(binding.getRoot());
         Log.d("Salida", "onCreate: Intent recibido");
         Intent intent = getIntent();
-        if (intent != null && Intent.ACTION_VIEW.equals(intent.getAction())) {
-            Uri uri = intent.getData();
-            if (uri != null) {
-                token = uri.getQueryParameter("access_token");
-                if (token != null) {
-                    // Use the token to reset the password
-                    // For example, show the UI for entering a new password
+        Uri data = intent.getData();
 
-                } else {
-                    // Handle error: no token found
+        if (data != null) {
+            String token = data.getQueryParameter("access_token");
+            if (token != null) {
+                Log.d("RecibirEmailActivity", "Token recibido: " + token);
+            }
 
+
+            binding.btnGuardarRecibirEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    vm.actualizarPass("Bearer " + token, binding.etPass1.getText().toString(),binding.etPass2.getText().toString());
                 }
-            } else {
-                // Handle error: no URI
+            });
 
-            }
+
         }
-
-        binding.btnGuardarRecibirEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vm.actualizarPass("Bearer "+token,binding.etPassRecibirEmail.getText().toString());
-            }
-        });
 
 
     }
-
-
-
-
-
-
-
 }

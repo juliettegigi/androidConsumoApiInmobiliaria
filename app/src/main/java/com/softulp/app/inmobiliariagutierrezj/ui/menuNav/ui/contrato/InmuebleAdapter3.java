@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.softulp.app.inmobiliariagutierrezj.R;
+import com.softulp.app.inmobiliariagutierrezj.models.Contrato;
 import com.softulp.app.inmobiliariagutierrezj.models.Inmueble;
 import com.softulp.app.inmobiliariagutierrezj.request.ApiClient;
 
@@ -65,7 +66,9 @@ public class InmuebleAdapter3 extends RecyclerView.Adapter<InmuebleAdapter3.View
             @Override
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
-                bundle.putSerializable("contrato",inmueble.getContratos().get(0));
+                Contrato contrato=inmueble.getContratos().get(0);
+                contrato.setInmueble(inmueble);
+                bundle.putSerializable("contrato",contrato);
                 Navigation.findNavController((Activity) v.getContext(), R.id.nav_host_fragment_content_menu_navegable).navigate(R.id.nav_verContratoFragment,bundle);
 
             }

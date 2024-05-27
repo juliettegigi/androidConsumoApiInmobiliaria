@@ -12,12 +12,14 @@ public class Usuario implements Serializable {
 
     private String email;
     private String pass;
+    private String domicilio;
     private ArrayList<Inmueble> inmuebles;
 
     public Usuario(){
 
     }
-    public Usuario(String nombre, String apellido,String dni,String telefono, String email){
+
+    public Usuario( String nombre, String apellido,String dni, String telefono, String email) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,21 +27,15 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public Usuario(int id, String nombre, String apellido,String dni,String telefono, String email, String pass) {
-        this.id=id;
+    public Usuario(int id, String dni, String nombre, String apellido, String telefono, String email, String pass, String domicilio, ArrayList<Inmueble> inmuebles) {
+        this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
         this.pass = pass;
-    }
-
-    public ArrayList<Inmueble> getInmuebles() {
-        return inmuebles;
-    }
-
-    public void setInmuebles(ArrayList<Inmueble> inmuebles) {
+        this.domicilio = domicilio;
         this.inmuebles = inmuebles;
     }
 
@@ -49,14 +45,6 @@ public class Usuario implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public String getDni() {
@@ -83,6 +71,14 @@ public class Usuario implements Serializable {
         this.apellido = apellido;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -99,17 +95,19 @@ public class Usuario implements Serializable {
         this.pass = pass;
     }
 
+    public String getDomicilio() {
+        return domicilio;
+    }
 
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id= "+id+
-                "dni= " + dni +
-                ", nombre= '" + nombre + '\'' +
-                ", apellido= '" + apellido + '\'' +
-                ", email= '" + email + '\'' +
-                ", pass= '" + pass + '\'' +
-                '}';
+    public ArrayList<Inmueble> getInmuebles() {
+        return inmuebles;
+    }
+
+    public void setInmuebles(ArrayList<Inmueble> inmuebles) {
+        this.inmuebles = inmuebles;
     }
 }

@@ -1,6 +1,8 @@
 package com.softulp.app.inmobiliariagutierrezj.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +24,15 @@ public class EsperandoCorreoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= ActivityEsperandoCorreoBinding.inflate(getLayoutInflater());
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(EsperandoCorreoViewModel.class);
-        setContentView(R.layout.activity_esperando_correo);
+        setContentView(binding.getRoot());
+
+        binding.btnIniciarSes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(EsperandoCorreoActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

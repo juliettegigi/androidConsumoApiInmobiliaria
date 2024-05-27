@@ -2,6 +2,7 @@ package com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.contrato;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -23,11 +24,11 @@ public class VerContratoViewModel extends AndroidViewModel {
         return mutableContrato;
     }
     public void recibirContrato(Bundle bundle){
+
         Contrato contrato=(Contrato) bundle.get("contrato");
 
         if(contrato!=null){
             mutableContrato.setValue(contrato);
-
 
         }
 

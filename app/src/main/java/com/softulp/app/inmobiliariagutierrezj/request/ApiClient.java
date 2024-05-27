@@ -6,9 +6,9 @@ import com.softulp.app.inmobiliariagutierrezj.models.Inmueble;
 import com.softulp.app.inmobiliariagutierrezj.models.InmuebleTipo;
 import com.softulp.app.inmobiliariagutierrezj.models.Usuario;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -24,11 +24,10 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
-import retrofit2.http.Path;
 
 public class ApiClient {
 
-    private static final String URL="http://192.168.0.91:5000/"; //celular
+    private static final String URL="http://192.168.199.91:5000/"; //celular
    // private static final String URL="http://192.168.16.100:5000/";
     private static MisEndpoints misEndpoints;
 
@@ -90,10 +89,14 @@ public class ApiClient {
 
     //parsear json a objeto java
     public static MisEndpoints getMisEndpoints(){  //retorno un objeto q implementa la interfaz q la implementa el retrofit
-        Gson gson = new GsonBuilder().setLenient().create();
+
+        Gson gson = new GsonBuilder()
+                         .setLenient()
+                         .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                         .create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
-               // .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson)) //parsear json a objeto java
                 .build();
          misEndpoints=retrofit.create(MisEndpoints.class);

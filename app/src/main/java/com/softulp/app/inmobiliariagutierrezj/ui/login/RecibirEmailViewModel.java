@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.softulp.app.inmobiliariagutierrezj.request.ApiClient;
 import com.softulp.app.inmobiliariagutierrezj.request.Archivos;
@@ -16,15 +18,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RecibirEmailViewModel extends AndroidViewModel {
+    MutableLiveData<String> mutableMsgError;
     public RecibirEmailViewModel(@NonNull Application application) {
         super(application);
     }
+    public LiveData<String> getMutableMsgError(){
+        if(mutableMsgError==null)
+            mutableMsgError=new MutableLiveData<>();
+        return  mutableMsgError;
+    }
+    public void actualizarPass(String token,String nuevaPass,String nuevaPass2){
+        if(!nuevaPass.equals(nuevaPass2)){
+            mutableMsgError.setValue("Las contraseñas ingresadas no coinciden");
+            return;
+        }
 
-    public void actualizarPass(String token,String nuevaPass){
-        Log.d("salida------ ", token);
         ApiClient.MisEndpoints api = ApiClient.getMisEndpoints();
         Call<String> call= api.actualizarPass(token,nuevaPass);
-        Log.d("salida------dd ", nuevaPass);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

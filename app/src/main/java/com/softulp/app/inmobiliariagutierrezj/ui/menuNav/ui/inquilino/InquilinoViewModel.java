@@ -64,7 +64,7 @@ public class InquilinoViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<ArrayList<Inmueble>> call, Throwable throwable) {
-                Log.d("salida", "Falla en vista de perfil");
+                Log.d("salida", "Falla en vista diquiñllinno");
             }
         });
     }
