@@ -95,14 +95,14 @@
 
         <EditText
             android:id="@+id/etPass"
-            android:layout_width="340dp"
-            android:layout_height="37dp"
+            android:layout_width="315dp"
+            android:layout_height="38dp"
             android:ems="10"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPass" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPass"
+            app:layout_constraintVertical_bias="0.318" />
 
         <TextView
             android:id="@+id/tvPass"
@@ -114,23 +114,21 @@
             android:text="Contraseña"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivIsVisible"
+            android:layout_width="30dp"
+            android:layout_height="33dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/etPass"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.659"
+            app:srcCompat="@drawable/visibility_offp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/btnRegistrame"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="3dp"
-        android:layout_height="wrap_content"
-        android:text="Registrarme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion"
-        app:layout_constraintVertical_bias="0.927"
-        android:theme="@style/mibuton"
-        android:textColor="@color/violeta"
-        android:foreground="@drawable/btnregistrarme"
-        />
+
 
     <TextView
         android:id="@+id/tvMsgError"
@@ -141,43 +139,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/c2" />
 
-    <TextView
-        android:id="@+id/tvOlvideClave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:text="Olvidé mi clave"
-        android:textColor="@color/violeta"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/c2" />
-
     <Button
         android:id="@+id/btnIniciarSesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="3dp"
 
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/mibutton"
         android:text="Iniciar sesión"
-        app:layout_constraintTop_toBottomOf="@+id/tvOlvideClave"
-        tools:layout_editor_absoluteX="3dp" />
+        app:layout_constraintTop_toBottomOf="@+id/c2"
+        tools:layout_editor_absoluteX="5dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/btnRegistrame"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="@+id/c2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
-        />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnOlvideClave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3dp"
+        android:foreground="@drawable/btnregistrarme"
+        android:text="Olvidé mi clave"
+        android:textColor="@color/violeta"
+        android:theme="@style/mibuton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion"
+        app:layout_constraintVertical_bias="0.937" />
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

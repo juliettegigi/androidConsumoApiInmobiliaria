@@ -52,7 +52,6 @@ public class InmuebleViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<ArrayList<Inmueble>> call, Response<ArrayList<Inmueble>> response) {
                 if(response.isSuccessful()){
-                    Log.d("salida","sta ssssssssssss");
                     inmuebleList=response.body();
                     RecyclerView.Adapter<InmuebleAdapter.ViewHolder>  adapter=new InmuebleAdapter(inmuebleList,getApplication());
                     mutableAdapter.setValue(adapter);

@@ -70,7 +70,10 @@ public class CrearInmFragment extends Fragment {
                                 binding.etDireccion.getText().toString(),
                         binding.etCatidadAmbientes.getText().toString(),
                         binding.spinnerUso.getSelectedItem().toString(),
-                        binding.etPrecioBase.getText().toString());
+                        binding.etPrecioBase.getText().toString(),
+                        requireView(),
+                        getContext());
+
 
             }
         });

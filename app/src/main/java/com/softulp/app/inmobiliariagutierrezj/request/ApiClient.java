@@ -24,10 +24,11 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public class ApiClient {
 
-    private static final String URL="http://192.168.199.91:5000/"; //celular
+    private static final String URL="http://192.168.77.91:5000/"; //celular
    // private static final String URL="http://192.168.16.100:5000/";
     private static MisEndpoints misEndpoints;
 
@@ -83,6 +84,10 @@ public class ApiClient {
         Call<String> actualizarPass(@Header("Authorization") String token,@Field("nuevaPass")  String pass);
 
 
+        @PUT("Inmueble/{id}")
+        Call<Inmueble> cambiarSuspendido(@Header("Authorization") String token,@Path("id")  int id);
+
+
 
 
     }
@@ -93,6 +98,7 @@ public class ApiClient {
         Gson gson = new GsonBuilder()
                          .setLenient()
                          .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                         .registerTypeAdapter(Inmueble.Uso.class, new UsoDeserializer())
                          .create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)

@@ -88,7 +88,7 @@
     <fragment
         android:id="@+id/nav_verContratoFragment"
         android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.contrato.VerContratoFragment"
-        android:label="Ver contrato"
+        android:label="Contrato"
         tools:layout="@layout/fragment_ver_contrato" >
         <action
             android:id="@+id/action_nav_verContratoFragment_to_nav_contrato"
@@ -100,7 +100,7 @@
     <fragment
         android:id="@+id/nav_verPagosFragment"
         android:name="com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.contrato.VerPagosFragment"
-        android:label="fragment_ver_pagosfragment"
+        android:label="Pagos"
         tools:layout="@layout/fragment_ver_pagosfragment" >
         <action
             android:id="@+id/action_nav_verPagosFragment_to_nav_verContratoFragment"

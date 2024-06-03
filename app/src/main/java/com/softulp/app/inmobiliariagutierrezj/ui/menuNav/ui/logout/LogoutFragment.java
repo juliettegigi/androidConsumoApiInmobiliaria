@@ -13,26 +13,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.softulp.app.inmobiliariagutierrezj.R;
+import com.softulp.app.inmobiliariagutierrezj.databinding.FragmentLogoutBinding;
+import com.softulp.app.inmobiliariagutierrezj.databinding.FragmentVerInquilinoBinding;
+import com.softulp.app.inmobiliariagutierrezj.ui.dialogos.Dialogos;
+import com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inquilino.VerInquilinoViewModel;
 
 public class LogoutFragment extends Fragment {
 
-    private LogoutViewModel mViewModel;
-
-    public static LogoutFragment newInstance() {
-        return new LogoutFragment();
-    }
-
+    LogoutViewModel vm;
+    FragmentLogoutBinding binding;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_logout, container, false);
+
+        vm = new ViewModelProvider(this).get(LogoutViewModel.class);
+
+        binding = FragmentLogoutBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        Dialogos.dialogoSalir(getContext());
+        return root;
+
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(LogoutViewModel.class);
-        // TODO: Use the ViewModel
-    }
+
 
 }

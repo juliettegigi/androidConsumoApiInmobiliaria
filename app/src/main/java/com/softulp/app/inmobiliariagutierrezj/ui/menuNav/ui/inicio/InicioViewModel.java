@@ -1,19 +1,17 @@
 package com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inicio;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class InicioViewModel extends ViewModel {
+public class InicioViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<String> mText;
 
-    public InicioViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
+    public InicioViewModel(@NonNull Application application) {
+        super(application);
     }
 }

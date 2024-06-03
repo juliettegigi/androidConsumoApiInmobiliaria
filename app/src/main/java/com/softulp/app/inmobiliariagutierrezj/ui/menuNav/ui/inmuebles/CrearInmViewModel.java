@@ -2,12 +2,16 @@ package com.softulp.app.inmobiliariagutierrezj.ui.menuNav.ui.inmuebles;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.activity.result.ActivityResult;
@@ -15,16 +19,20 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.softulp.app.inmobiliariagutierrezj.R;
 import com.softulp.app.inmobiliariagutierrezj.models.Inmueble;
 import com.softulp.app.inmobiliariagutierrezj.models.InmuebleTipo;
 import com.softulp.app.inmobiliariagutierrezj.models.Usuario;
 import com.softulp.app.inmobiliariagutierrezj.request.ApiClient;
 import com.softulp.app.inmobiliariagutierrezj.request.Archivos;
+import com.softulp.app.inmobiliariagutierrezj.ui.dialogos.Dialogos;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +67,7 @@ public class CrearInmViewModel extends AndroidViewModel {
     public LiveData<RecyclerView.Adapter<ImgInmAdapter.ViewHolder>> getMutableAdapterRV(){
         if(mutableAdapterRV==null) {
             mutableAdapterRV = new MutableLiveData<RecyclerView.Adapter<ImgInmAdapter.ViewHolder>>();
+
 
         }
         return mutableAdapterRV;
@@ -96,10 +105,6 @@ public class CrearInmViewModel extends AndroidViewModel {
                     ArrayAdapter<InmuebleTipo> adapter = new ArrayAdapter<>(getApplication(), android.R.layout.simple_spinner_item, inmuebleTipos);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     mutableAdapterInmuebleTipos.setValue(adapter);
-                }
-                else if(response.code() == 204) {
-                    Log.d("salida", "q caralio");
-//respuesta cuando no se le pasa el token
                 }
 
 
@@ -143,7 +148,7 @@ public class CrearInmViewModel extends AndroidViewModel {
     }
 
 
- public void AltaInmueble(int tipoInmuble,String direccion,String cantidadAmbientes,String uso,String precioBase){
+ public void AltaInmueble(int tipoInmuble, String direccion, String cantidadAmbientes, String uso, String precioBase, View v,Context context){
         ApiClient.MisEndpoints api = ApiClient.getMisEndpoints();
         String token="Bearer "+Archivos.leerTokenArchivoPreferencia(getApplication());
 
@@ -154,26 +159,27 @@ public class CrearInmViewModel extends AndroidViewModel {
         RequestBody PrecioBase = RequestBody.create(MediaType.parse("text/plain"), precioBase);
         RequestBody cLatitud = RequestBody.create(MediaType.parse("text/plain"), "0");
         RequestBody cLongitud = RequestBody.create(MediaType.parse("text/plain"), "0");
-        RequestBody suspendido = RequestBody.create(MediaType.parse("text/plain"), "false");
+        RequestBody suspendido = RequestBody.create(MediaType.parse("text/plain"), "true");
         RequestBody disponible = RequestBody.create(MediaType.parse("text/plain"), "true");
      RecyclerView.Adapter<ImgInmAdapter.ViewHolder> adapter = mutableAdapterRV.getValue();
      ImgInmAdapter imgInmAdapter = (ImgInmAdapter) adapter;
-     List<Bitmap> listaDeImagenes = imgInmAdapter.getLista(getApplication());
-
-     List<MultipartBody.Part> partesDeImagenes = new ArrayList<>();
-
-// Recorrer la lista de bitmaps y convertir cada uno en una parte multipart
-     for (Bitmap bitmap : listaDeImagenes) {
-         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"), byteArrayOutputStream.toByteArray());
-         MultipartBody.Part parteDeImagen = MultipartBody.Part.createFormData("imagenes", "nombre_de_archivo.jpg", requestBody);
-         partesDeImagenes.add(parteDeImagen);
+     List<MultipartBody.Part> partesDeImagenes= new ArrayList<>();
+     List<Bitmap>  listaDeImagenesBit;
+     if(imgInmAdapter!=null){
+         listaDeImagenesBit = imgInmAdapter.getLista(getApplication());
      }
-
-
-
-     Log.d("salida", String.valueOf(listaDeImagenes.size()));
+     else{
+         List<Uri> imageUris=new ArrayList<>();
+         imageUris.add(Uri.parse("android.resource://" + getApplication().getPackageName() + "/" + R.drawable.no_image));
+         listaDeImagenesBit=listaUriABitMap(imageUris);
+     }
+         for (Bitmap bitmap : listaDeImagenesBit) {
+             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+             RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"), byteArrayOutputStream.toByteArray());
+             MultipartBody.Part parteDeImagen = MultipartBody.Part.createFormData("imagenes", "nombre_de_archivo.jpg", requestBody);
+             partesDeImagenes.add(parteDeImagen);
+         }
 
         Call<Inmueble> call= api.postInmueble(token,InmuebleTipoId,Direccion,CantidadAmbientes,Uso,PrecioBase,cLatitud,cLongitud,suspendido,disponible, partesDeImagenes);
 
@@ -181,11 +187,14 @@ public class CrearInmViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
                 if(response.isSuccessful()){
-                   Log.d("salida","weno");
+                  //  Navigation.findNavController((Activity) getApplication().getApplicationContext(), R.id.nav_host_fragment_content_menu_navegable).navigate(R.id.nav_inmueble);
+                    Dialogos.dialogoInmCreado(context,v);
+
+
+
                 }
-                else if(response.code() == 204) {
-                    Log.d("salida", "q caralio");
-//respuesta cuando no se le pasa el token
+                else {
+                  Dialogos.dialogoCrearInm(context);
                 }
 
 
@@ -198,4 +207,19 @@ public class CrearInmViewModel extends AndroidViewModel {
         });
 
     }
+
+    public List<Bitmap> listaUriABitMap(List<Uri> lista) {
+        List<Bitmap> listaBitmap = new ArrayList<>();
+
+        for (Uri uri : lista) {
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(getApplication().getContentResolver().openInputStream(uri));
+                listaBitmap.add(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return listaBitmap;
+    }
+
 }

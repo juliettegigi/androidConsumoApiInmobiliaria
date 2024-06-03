@@ -56,4 +56,10 @@ public class InmuebleFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        vm.cargarInmuebles();
+    }
 }

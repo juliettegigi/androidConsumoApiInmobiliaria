@@ -25,7 +25,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,36 +34,76 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.371">
 
-        <EditText
-            android:id="@+id/etPass1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="nueva contraseña"
-            android:inputType="text" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etPass2"
+            <EditText
+                android:id="@+id/etPass1"
+                android:layout_width="271dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Nueva contraseña"
+                android:inputType="textPassword" />
+
+            <ImageView
+                android:id="@+id/ivVisible1"
+                android:layout_width="16dp"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/visibility_offp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Repetir contraseña"
-            android:inputType="textVisiblePassword" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etPass2"
+                android:layout_width="271dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Repetir contraseña"
+                android:inputType="textPassword"
+                android:text="" />
+
+            <ImageView
+                android:id="@+id/ivVisible2"
+                android:layout_width="16dp"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/visibility_offp" />
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btnGuardarRecibirEmail"
+            android:id="@+id/btnGuardarNuevaPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:background="@drawable/mibutton"
-            android:layout_weight="1"
-            android:text="guardar" />
-
-
+            android:text="Guardar"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="468dp" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

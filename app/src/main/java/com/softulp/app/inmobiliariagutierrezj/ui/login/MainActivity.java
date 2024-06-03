@@ -12,6 +12,7 @@ import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -63,6 +64,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 binding.tvMsgError.setText(s);
                 binding.tvEmail.setTextColor(Color.RED);
                 binding.progressBar.setVisibility(View.GONE);
+                vm.setMutableLoginStatus(View.GONE);
+            }
+        });
+
+        vm.getMutableVisible().observe(this, new Observer<Visible>() {
+            @Override
+            public void onChanged(Visible visible) {
+                binding.etPass.setInputType(visible.getTipoInput());
+                binding.ivIsVisible.setImageResource(visible.getImagen());
+                binding.etPass.setSelection(visible.getCursorPosition());
             }
         });
 
@@ -75,19 +86,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        vm.getMutableLoginStatus().observe(this, new Observer<Boolean>() {
+        vm.getMutableLoginStatus().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(Boolean isSuccess) {
-                binding.progressBar.setVisibility(View.GONE);
+            public void onChanged(Integer i) {
+                binding.progressBar.setVisibility(i);
             }
         });
 
-        binding.tvOlvideClave.setOnClickListener(new View.OnClickListener() {
+        binding.btnOlvideClave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.progressBar.setVisibility(View.VISIBLE);
                 Intent intent=new Intent(MainActivity.this, RestablecerPassActivity.class);
                 startActivity(intent);
+            }
+        });
+        binding.ivIsVisible.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vm.cambiarVisible( binding.etPass.getSelectionStart());
             }
         });
 
@@ -136,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void startCall() {
-        String phoneNumber = "tel:2664378615";
+        String phoneNumber = "tel:2664378600";
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse(phoneNumber));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
@@ -188,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        binding.progressBar.setVisibility(View.GONE);
+        vm.setMutableLoginStatus(View.GONE);
         if (sensorManager != null) {
             sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
