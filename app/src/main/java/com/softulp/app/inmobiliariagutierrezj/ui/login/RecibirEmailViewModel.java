@@ -86,7 +86,7 @@ public class RecibirEmailViewModel extends AndroidViewModel {
         else mutableVisible2.setValue(v);
     }
 
-    public void actualizarPass(String token, String nuevaPass, String nuevaPass2, Context context){
+    public void actualizarPass(String token, String nuevaPass, String nuevaPass2,Context context){
         mutableVerProgressBar.setValue(View.VISIBLE);
         if(!nuevaPass.equals(nuevaPass2)){
             mutableVerProgressBar.setValue(View.GONE);

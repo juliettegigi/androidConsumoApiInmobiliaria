@@ -48,9 +48,9 @@ import retrofit2.Response;
 
 public class CrearInmViewModel extends AndroidViewModel {
 
-        private MutableLiveData<ArrayAdapter<InmuebleTipo>> mutableAdapterInmuebleTipos;
-        private MutableLiveData<ArrayAdapter<String>> mutableAdapterUsos;
-        private MutableLiveData<RecyclerView.Adapter<ImgInmAdapter.ViewHolder>> mutableAdapterRV;
+    private MutableLiveData<ArrayAdapter<InmuebleTipo>> mutableAdapterInmuebleTipos;
+    private MutableLiveData<ArrayAdapter<String>> mutableAdapterUsos;
+    private MutableLiveData<RecyclerView.Adapter<ImgInmAdapter.ViewHolder>> mutableAdapterRV;
 
 
     public CrearInmViewModel(@NonNull Application application) {
@@ -148,7 +148,7 @@ public class CrearInmViewModel extends AndroidViewModel {
     }
 
 
- public void AltaInmueble(int tipoInmuble, String direccion, String cantidadAmbientes, String uso, String precioBase, View v,Context context){
+    public void AltaInmueble(int tipoInmuble, String direccion, String cantidadAmbientes, String uso, String precioBase, Context context){
         ApiClient.MisEndpoints api = ApiClient.getMisEndpoints();
         String token="Bearer "+Archivos.leerTokenArchivoPreferencia(getApplication());
 
@@ -161,25 +161,25 @@ public class CrearInmViewModel extends AndroidViewModel {
         RequestBody cLongitud = RequestBody.create(MediaType.parse("text/plain"), "0");
         RequestBody suspendido = RequestBody.create(MediaType.parse("text/plain"), "true");
         RequestBody disponible = RequestBody.create(MediaType.parse("text/plain"), "true");
-     RecyclerView.Adapter<ImgInmAdapter.ViewHolder> adapter = mutableAdapterRV.getValue();
-     ImgInmAdapter imgInmAdapter = (ImgInmAdapter) adapter;
-     List<MultipartBody.Part> partesDeImagenes= new ArrayList<>();
-     List<Bitmap>  listaDeImagenesBit;
-     if(imgInmAdapter!=null){
-         listaDeImagenesBit = imgInmAdapter.getLista(getApplication());
-     }
-     else{
-         List<Uri> imageUris=new ArrayList<>();
-         imageUris.add(Uri.parse("android.resource://" + getApplication().getPackageName() + "/" + R.drawable.no_image));
-         listaDeImagenesBit=listaUriABitMap(imageUris);
-     }
-         for (Bitmap bitmap : listaDeImagenesBit) {
-             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-             RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"), byteArrayOutputStream.toByteArray());
-             MultipartBody.Part parteDeImagen = MultipartBody.Part.createFormData("imagenes", "nombre_de_archivo.jpg", requestBody);
-             partesDeImagenes.add(parteDeImagen);
-         }
+        RecyclerView.Adapter<ImgInmAdapter.ViewHolder> adapter = mutableAdapterRV.getValue();
+        ImgInmAdapter imgInmAdapter = (ImgInmAdapter) adapter;
+        List<MultipartBody.Part> partesDeImagenes= new ArrayList<>();
+        List<Bitmap>  listaDeImagenesBit;
+        if(imgInmAdapter!=null){
+            listaDeImagenesBit = imgInmAdapter.getLista(getApplication());
+        }
+        else{
+            List<Uri> imageUris=new ArrayList<>();
+            imageUris.add(Uri.parse("android.resource://" + getApplication().getPackageName() + "/" + R.drawable.no_image));
+            listaDeImagenesBit=listaUriABitMap(imageUris);
+        }
+        for (Bitmap bitmap : listaDeImagenesBit) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"), byteArrayOutputStream.toByteArray());
+            MultipartBody.Part parteDeImagen = MultipartBody.Part.createFormData("imagenes", "nombre_de_archivo.jpg", requestBody);
+            partesDeImagenes.add(parteDeImagen);
+        }
 
         Call<Inmueble> call= api.postInmueble(token,InmuebleTipoId,Direccion,CantidadAmbientes,Uso,PrecioBase,cLatitud,cLongitud,suspendido,disponible, partesDeImagenes);
 
@@ -187,14 +187,14 @@ public class CrearInmViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
                 if(response.isSuccessful()){
-                  //  Navigation.findNavController((Activity) getApplication().getApplicationContext(), R.id.nav_host_fragment_content_menu_navegable).navigate(R.id.nav_inmueble);
-                    Dialogos.dialogoInmCreado(context,v);
+                    //  Navigation.findNavController((Activity) getApplication().getApplicationContext(), R.id.nav_host_fragment_content_menu_navegable).navigate(R.id.nav_inmueble);
+                    Dialogos.dialogoInmCreado(context);
 
 
 
                 }
                 else {
-                  Dialogos.dialogoCrearInm(context);
+                    Dialogos.dialogoCrearInm(context);
                 }
 
 

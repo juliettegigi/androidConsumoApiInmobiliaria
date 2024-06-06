@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.Navigation;
 
+import com.softulp.app.inmobiliariagutierrezj.R;
 import com.softulp.app.inmobiliariagutierrezj.databinding.DialogoBinding;
 import com.softulp.app.inmobiliariagutierrezj.request.Archivos;
 import com.softulp.app.inmobiliariagutierrezj.ui.login.MainActivity;
@@ -20,7 +22,6 @@ public class Dialogos {
 
 
     public static void dialogoSalir(Context context){
-
         new AlertDialog.Builder(context) // creo una instancia de Builder, le paso el contexto
                 .setTitle("Cierre de sesión")
                 .setMessage("Desea cerrar la app?")
@@ -59,13 +60,15 @@ public class Dialogos {
     }
 
 
-    public static void dialogoInmCreado(Context context, View v){
+    public static void dialogoInmCreado(Context context){
         new AlertDialog.Builder(context)
                 .setTitle("Inmueble agregado")
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Navigation.findNavController(v).popBackStack();
+                      FragmentActivity activity = (FragmentActivity) context;
+                      Navigation.findNavController(activity,R.id.nav_host_fragment_content_menu_navegable).navigate(R.id.nav_inmueble);
+
                     }
                 })
                 .show();

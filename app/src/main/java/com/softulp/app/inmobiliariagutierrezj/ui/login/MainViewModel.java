@@ -1,7 +1,13 @@
 package com.softulp.app.inmobiliariagutierrezj.ui.login;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -100,4 +106,8 @@ public class MainViewModel extends AndroidViewModel {
             }
         });
     }
+
+
+
+
 }

@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import com.softulp.app.inmobiliariagutierrezj.R;
 import com.softulp.app.inmobiliariagutierrezj.databinding.FragmentCrearInmBinding;
 import com.softulp.app.inmobiliariagutierrezj.models.InmuebleTipo;
+import com.softulp.app.inmobiliariagutierrezj.ui.dialogos.Dialogos;
 
 public class CrearInmFragment extends Fragment {
 
@@ -71,8 +72,8 @@ public class CrearInmFragment extends Fragment {
                         binding.etCatidadAmbientes.getText().toString(),
                         binding.spinnerUso.getSelectedItem().toString(),
                         binding.etPrecioBase.getText().toString(),
-                        requireView(),
-                        getContext());
+                        getContext()
+                        );
 
 
             }
