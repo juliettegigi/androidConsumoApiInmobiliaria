@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        binding.btnOlvideClave.setOnClickListener(new View.OnClickListener() {
+        binding.btnOlvidarPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this, RestablecerPassActivity.class);

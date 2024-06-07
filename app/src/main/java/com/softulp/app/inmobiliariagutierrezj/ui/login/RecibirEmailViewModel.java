@@ -24,6 +24,7 @@ import retrofit2.Response;
 
 public class RecibirEmailViewModel extends AndroidViewModel {
 
+    MutableLiveData<Boolean> mutableDialogo;
     MutableLiveData<Visible> mutableVisible1;
     MutableLiveData<Visible> mutableVisible2;
     private MutableLiveData<Integer> mutableVerProgressBar;
@@ -32,6 +33,11 @@ public class RecibirEmailViewModel extends AndroidViewModel {
     }
 
 
+    public LiveData<Boolean> getMutableDialogo(){
+        if(mutableDialogo==null)
+            mutableDialogo=new MutableLiveData<>();
+        return mutableDialogo;
+    }
     public LiveData<Visible> getMutableVisible1() {
         if(mutableVisible1==null){
             Visible visible=new Visible(false, R.drawable.visibility_offp, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD,0);
@@ -90,7 +96,7 @@ public class RecibirEmailViewModel extends AndroidViewModel {
         mutableVerProgressBar.setValue(View.VISIBLE);
         if(!nuevaPass.equals(nuevaPass2)){
             mutableVerProgressBar.setValue(View.GONE);
-            Dialogos.dialogoPassDistintas(context);
+            mutableDialogo.setValue(true);
             return;
         }
 

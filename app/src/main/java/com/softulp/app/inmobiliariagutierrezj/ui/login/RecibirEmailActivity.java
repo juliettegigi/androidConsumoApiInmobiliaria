@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.softulp.app.inmobiliariagutierrezj.databinding.ActivityRecibirEmailBinding;
+import com.softulp.app.inmobiliariagutierrezj.ui.dialogos.Dialogos;
 
 public class RecibirEmailActivity extends AppCompatActivity {
 ActivityRecibirEmailBinding binding;
@@ -38,6 +39,13 @@ ActivityRecibirEmailBinding binding;
                 public void onClick(View v) {
                     vm.actualizarPass("Bearer " + token, binding.etPass1.getText().toString(),binding.etPass2.getText().toString(),RecibirEmailActivity.this);
 
+                }
+            });
+
+            vm.getMutableDialogo().observe(this, new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean aBoolean) {
+                    Dialogos.dialogoPassDistintas(RecibirEmailActivity.this);
                 }
             });
             vm.getMutableVerProgressBar().observe(this, new Observer<Integer>() {

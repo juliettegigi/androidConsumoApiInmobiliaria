@@ -36,9 +36,6 @@ public class CrearInmFragment extends Fragment {
     private Intent intent;
     private ActivityResultLauncher<Intent> arl;
 
-    public static CrearInmFragment newInstance() {
-        return new CrearInmFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -53,6 +50,18 @@ public class CrearInmFragment extends Fragment {
                         binding.spinnerImuebleTipos.setAdapter(stringArrayAdapter);
                     }
                 });
+        vm.getMutableDialogoCrearInm().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Dialogos.dialogoCrearInm(getContext());
+            }
+        });
+        vm.getMutableDialogoInmCreado().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Dialogos.dialogoInmCreado(getContext());
+            }
+        });
         vm.getMutableAdapterRV().observe(getViewLifecycleOwner(), new Observer<RecyclerView.Adapter<ImgInmAdapter.ViewHolder>>() {
             @Override
             public void onChanged(RecyclerView.Adapter<ImgInmAdapter.ViewHolder> viewHolderAdapter) {
@@ -71,8 +80,7 @@ public class CrearInmFragment extends Fragment {
                                 binding.etDireccion.getText().toString(),
                         binding.etCatidadAmbientes.getText().toString(),
                         binding.spinnerUso.getSelectedItem().toString(),
-                        binding.etPrecioBase.getText().toString(),
-                        getContext()
+                        binding.etPrecioBase.getText().toString()
                         );
 
 
@@ -114,7 +122,7 @@ public class CrearInmFragment extends Fragment {
 
         arl = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
-            public void onActivityResult(ActivityResult result) { //result.getData() contiene el intent con los datos seleccionado
+            public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     vm.recibirFotos(result);
                 }

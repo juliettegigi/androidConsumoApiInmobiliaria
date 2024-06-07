@@ -49,6 +49,8 @@ import retrofit2.Response;
 public class CrearInmViewModel extends AndroidViewModel {
 
     private MutableLiveData<ArrayAdapter<InmuebleTipo>> mutableAdapterInmuebleTipos;
+    private MutableLiveData<Boolean> mutableDialogoInmCreado;
+    private MutableLiveData<Boolean> mutableDialogoCrearInm;
     private MutableLiveData<ArrayAdapter<String>> mutableAdapterUsos;
     private MutableLiveData<RecyclerView.Adapter<ImgInmAdapter.ViewHolder>> mutableAdapterRV;
 
@@ -58,6 +60,17 @@ public class CrearInmViewModel extends AndroidViewModel {
         super(application);
     }
 
+    public MutableLiveData<Boolean> getMutableDialogoInmCreado(){
+        if(mutableDialogoInmCreado==null)
+            mutableDialogoInmCreado=new MutableLiveData<>();
+        return mutableDialogoInmCreado;
+    }
+
+    public  MutableLiveData<Boolean> getMutableDialogoCrearInm(){
+        if(mutableDialogoCrearInm==null)
+            mutableDialogoCrearInm=new MutableLiveData<>();
+        return mutableDialogoCrearInm;
+    }
     public MutableLiveData<ArrayAdapter<InmuebleTipo>> getMutableInmuebleTipos(){
         if(mutableAdapterInmuebleTipos==null)
             mutableAdapterInmuebleTipos=new MutableLiveData<>();
@@ -148,7 +161,7 @@ public class CrearInmViewModel extends AndroidViewModel {
     }
 
 
-    public void AltaInmueble(int tipoInmuble, String direccion, String cantidadAmbientes, String uso, String precioBase, Context context){
+    public void AltaInmueble(int tipoInmuble, String direccion, String cantidadAmbientes, String uso, String precioBase){
         ApiClient.MisEndpoints api = ApiClient.getMisEndpoints();
         String token="Bearer "+Archivos.leerTokenArchivoPreferencia(getApplication());
 
@@ -186,23 +199,14 @@ public class CrearInmViewModel extends AndroidViewModel {
         call.enqueue(new Callback<Inmueble>() {
             @Override
             public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
-                if(response.isSuccessful()){
-                    //  Navigation.findNavController((Activity) getApplication().getApplicationContext(), R.id.nav_host_fragment_content_menu_navegable).navigate(R.id.nav_inmueble);
-                    Dialogos.dialogoInmCreado(context);
-
-
-
-                }
-                else {
-                    Dialogos.dialogoCrearInm(context);
-                }
-
+                if(response.isSuccessful()) mutableDialogoInmCreado.setValue(true);
+                else mutableDialogoCrearInm.setValue(true);
 
             }
 
             @Override
             public void onFailure(Call<Inmueble> call, Throwable throwable) {
-                Log.d("salida", "whaat"+throwable.getMessage());
+                Log.d("salida", throwable.getMessage());
             }
         });
 
